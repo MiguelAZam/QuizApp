@@ -1,23 +1,23 @@
 import 'FillBlankQuestion.dart';
 
 class Question {
-  var question;
+  var questionType;
 
-  Question({type, description, answer, options}) {
+  Question({type, question, answer, options}) {
     switch (type) {
       case ("FillBlank"):
-        this.question = FillBlankQuestion(description, answer);
+        this.questionType = FillBlankQuestion(question, answer);
         break;
       case ("MultipleQuestion"):
-        this.question = MultipleQuestion(description, answer, options);
+        this.questionType = MultipleQuestion(question, answer, options);
         break;
       default:
-        this.question = null;
+        this.questionType = null;
         break;
     }
   }
 
   bool check(String response) {
-    return question.check(response);
+    return questionType.check(response);
   }
 }
