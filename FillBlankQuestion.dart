@@ -1,3 +1,4 @@
+//Template class for fill the blank questions
 class FillBlankQuestion {
   var stem;
   var answer;
@@ -7,6 +8,8 @@ class FillBlankQuestion {
     this.answer = question["answer"];
   }
 
+  //Method to check if the response given by the user is correct
+  //going though all possible answers
   bool checkAnswer(String response) {
     for (var i = 0; i < answer.length; i++) {
       if (response == this.answer) {
@@ -15,4 +18,6 @@ class FillBlankQuestion {
     }
     return false;
   }
+
+  //TODO: Implement toString method to show question in the ui
 }

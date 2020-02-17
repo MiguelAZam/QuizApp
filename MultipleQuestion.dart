@@ -1,3 +1,4 @@
+//Template class for Multiple questions
 class MultipleQuestion {
   var stem;
   var answer;
@@ -9,7 +10,10 @@ class MultipleQuestion {
     this.option = question["option"];
   }
 
+  //Method to check if the response given by the user is correct
   bool checkAnswer(int response) {
     return response == this.answer;
   }
+
+  //TODO: Implement toString method to show question in the ui
 }
