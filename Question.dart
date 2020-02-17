@@ -1,25 +1,39 @@
-import 'FillBlankQuestion.dart';
-import 'MultipleQuestion.dart';
+import './FillBlankQuestion.dart';
+import './MultipleQuestion.dart';
 
+//Factory class to cast questions depending of
+//type given by the response from the server
 class Question {
+  //var questionType;
   var question;
 
-  // Fill out question depending on the type selected
-  Question({type, question, answer, options}) {
+  Question(type, question) {
+    //this.question = type;
     switch (type) {
-      case ("FillBlank"):
-        this.question = FillBlankQuestion(question, answer);
+      //Type 1 = Fill the blank
+      case (2):
+        this.question = FillBlankQuestion(question);
         break;
-      case ("MultipleQuestion"):
-        this.question = MultipleQuestion(question, answer, options);
+      //Type 2 = Multiple question
+      case (1):
+        this.question = MultipleQuestion(question);
         break;
+      //Otherwise, incorrect type of question
       default:
         this.question = null;
         break;
     }
   }
 
-  bool check(String response) {
-    return question.check(response);
+  //Method to check if the response given by the user
+  //IMPORTANT: I'm assuming that the response can be
+  //either int (multiple question) or string (fill the blank)
+  bool checkAnswer(dynamic response) {
+    return question.checkAnswer(response);
+  }
+
+  //TODO: Implement toString method to show question in the ui
+  String toString(){
+    return this.question.toString();
   }
 }
