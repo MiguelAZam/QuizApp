@@ -1,9 +1,18 @@
 class FillBlankQuestion {
-  var _description, _answer;
+  var stem;
+  var answer;
 
-  FillBlankQuestion(this._description, this._answer);
+  FillBlankQuestion(question) {
+    this.stem = question["stem"];
+    this.answer = question["answer"];
+  }
 
-  bool check(String response) {
-    return response == this._answer;
+  bool checkAnswer(String response) {
+    for (var i = 0; i < answer.length; i++) {
+      if (response == this.answer) {
+        return true;
+      }
+    }
+    return false;
   }
 }
