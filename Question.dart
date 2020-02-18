@@ -5,6 +5,7 @@ import './MultipleQuestion.dart';
 //type given by the response from the server
 class Question {
   var questionType;
+  var answer;
   var question;
 
   Question(type, question) {
@@ -13,14 +14,17 @@ class Question {
       //Type 2 = Fill the blank
       case (2):
         this.question = FillBlankQuestion(question);
+        this.answer = this.question.answer;
         break;
       //Type 1 = Multiple question
       case (1):
         this.question = MultipleQuestion(question);
+        this.answer = this.question.answer;
         break;
       //Otherwise, incorrect type of question
       default:
         this.question = null;
+        this.answer = null;
         break;
     }
   }

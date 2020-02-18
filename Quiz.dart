@@ -7,6 +7,7 @@ class Quiz {
   var quizName;                           // Quiz name
   List<Question> questions = [];          // Quiz questions
   List<Question> wrongQuestions = [];     // Wrong answered questions
+  List<dynamic> wrongAnswers = [];        // Wrong answers
   int score = 0;                          // Correct answered questions
   int totalQuestions = 0;                 // Total of answered questions
 
@@ -46,6 +47,7 @@ class Quiz {
           score++;
         } else {
           wrongQuestions.add(questions[i]);
+          wrongAnswers.add(answer);
         }
       } else {
         // Fill-in-the-blank question
@@ -54,11 +56,24 @@ class Quiz {
           score++;
         } else {
           wrongQuestions.add(questions[i]);
+          wrongAnswers.add(answer);
         }
       }
       totalQuestions++;
     }
   }
 
-  
+  void printWrongAnswers() {
+    for(int i = 0; i < wrongQuestions.length; i++) {
+      stdout.write(i+1);
+      stdout.write(') ');
+      wrongQuestions[i].toString();
+      stdout.writeln('');
+      stdout.write('Your answer: ');
+      print(wrongAnswers[i]);
+      stdout.write('Correct answer: ');
+      print(wrongQuestions[i].answer);
+      stdout.writeln('');
+    }
+  }
 }
