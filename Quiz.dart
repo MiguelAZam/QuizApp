@@ -1,13 +1,19 @@
 import './QuizAPI.dart';
 import './Question.dart';
+import 'dart:io';
 
 class Quiz {
-  var quiz;
-  var quizName;
-  List<Question> questions = [];
+  var quiz;                               // Quiz obtained form server
+  var quizName;                           // Quiz name
+  List<Question> questions = [];          // Quiz questions
+  List<Question> wrongQuestions = [];     // Wrong answered questions
+  int score = 0;                          // Correct answered questions
+  int totalQuestions = 0;                 // Total of answered questions
 
+  // Constructor
   Quiz(this.quiz);
 
+  // Retrieve quiz from server
   void setup() async {
     var receivedQuiz = await QuizAPI().getQuiz(this.quiz);
     if (receivedQuiz != null) {
@@ -18,14 +24,41 @@ class Quiz {
         this.questions.add(question);
       }
     }
-    //questions[1].toString();   // FIXME!!
   }
 
+  // Start solving the quiz
   void start() {
-    // for (int i = 0; i < this.questions.length; i++) {
-    //   print(this.questions[i].toString());
-    // }
-    // setup();
-    // questions[0].toString();   // FIXME!!
+    for (var i = 0; i < this.questions.length; i++) {
+      print(Process.runSync("clear", [], runInShell: true).stdout); // Clear console
+
+      // Write question
+      stdout.write(i+1);
+      stdout.write(') ');
+      questions[i].toString();
+      stdout.write('Answer: ');
+
+      // Evaluate answer depending on the question type
+      if(questions[i].questionType == 1) {
+        // Multiple choice question
+        var answer = int.parse(stdin.readLineSync());
+        assert(answer is int);
+        if (questions[i].checkAnswer(answer)){
+          score++;
+        } else {
+          wrongQuestions.add(questions[i]);
+        }
+      } else {
+        // Fill-in-the-blank question
+        String answer = stdin.readLineSync();
+        if (questions[i].checkAnswer(answer)){
+          score++;
+        } else {
+          wrongQuestions.add(questions[i]);
+        }
+      }
+      totalQuestions++;
+    }
   }
+
+  
 }

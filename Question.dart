@@ -4,17 +4,17 @@ import './MultipleQuestion.dart';
 //Factory class to cast questions depending of
 //type given by the response from the server
 class Question {
-  //var questionType;
+  var questionType;
   var question;
 
   Question(type, question) {
-    //this.question = type;
+    this.questionType = type;
     switch (type) {
-      //Type 1 = Fill the blank
+      //Type 2 = Fill the blank
       case (2):
         this.question = FillBlankQuestion(question);
         break;
-      //Type 2 = Multiple question
+      //Type 1 = Multiple question
       case (1):
         this.question = MultipleQuestion(question);
         break;

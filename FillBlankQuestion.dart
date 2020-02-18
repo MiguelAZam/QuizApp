@@ -11,8 +11,8 @@ class FillBlankQuestion {
   //Method to check if the response given by the user is correct
   //going though all possible answers
   bool checkAnswer(String response) {
-    for (var i = 0; i < answer.length; i++) {
-      if (response == this.answer) {
+    for (var i = 0; i < this.answer.length; i++) {
+      if (response == this.answer[i]) {
         return true;
       }
     }
