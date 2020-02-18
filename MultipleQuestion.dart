@@ -1,23 +1,34 @@
+/**
+ * Name: MultipleQuestion
+ * Authors: Miguel A. Zamudio & Cristian Ayub
+ * Description: Contains all methods that allow the creation and management of
+ * a multiple choice question
+ * Last update: Feb 2, 2020
+ */
+
 import 'dart:io';
 
-//Template class for Multiple questions
 class MultipleQuestion {
   var stem;
   var answer;
   var option;
 
+  /// Contructor
+  /// 
+  /// Receives a Map @question of type <String, dynamic>
+  /// and populates @stem, @answer, and @option
   MultipleQuestion(Map<String, dynamic> question) {
     this.stem = question["stem"];
     this.answer = question["answer"];
     this.option = question["option"];
   }
 
-  //Method to check if the response given by the user is correct
+  /// Checks if the response given by the user is correct
   bool checkAnswer(int response) {
     return response == this.answer;
   }
 
-  //TODO: Implement toString method to show question in the ui
+  /// Prints the question along with its answer options
   @override
   String toString() {
     print(this.stem);

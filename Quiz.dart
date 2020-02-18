@@ -1,20 +1,28 @@
+/**
+ * Name: Quiz
+ * Authors: Miguel A. Zamudio & Cristian Ayub
+ * Description: Contains all methods that allow creation of a new quiz and 
+ * the functionality of solving it
+ * Last update: Feb 2, 2020
+ */
+
 import './QuizAPI.dart';
 import './Question.dart';
 import 'dart:io';
 
 class Quiz {
-  var quiz;                               // Quiz obtained form server
-  var quizName;                           // Quiz name
-  List<Question> questions = [];          // Quiz questions
-  List<Question> wrongQuestions = [];     // Wrong answered questions
-  List<dynamic> wrongAnswers = [];        // Wrong answers
-  int score = 0;                          // Correct answered questions
-  int totalQuestions = 0;                 // Total of answered questions
+  var quiz;                               /// Quiz obtained form server
+  var quizName;                           /// Quiz name
+  List<Question> questions = [];          /// Quiz questions
+  List<Question> wrongQuestions = [];     /// Wrong answered questions
+  List<dynamic> wrongAnswers = [];        /// Wrong answers
+  int score = 0;                          /// Correct answered questions
+  int totalQuestions = 0;                 /// Total of answered questions
 
-  // Constructor
+  /// Constructor
   Quiz(this.quiz);
 
-  // Retrieve quiz from server
+  /// Retrieve quiz from server
   void setup() async {
     var receivedQuiz = await QuizAPI().getQuiz(this.quiz);
     if (receivedQuiz != null) {
@@ -27,20 +35,20 @@ class Quiz {
     }
   }
 
-  // Start solving the quiz
+  /// Start solving the quiz
   void start() {
     for (var i = 0; i < this.questions.length; i++) {
       print(Process.runSync("clear", [], runInShell: true).stdout); // Clear console
 
-      // Write question
+      /// Write question
       stdout.write(i+1);
       stdout.write(') ');
       questions[i].toString();
       stdout.write('Answer: ');
 
-      // Evaluate answer depending on the question type
+      /// Evaluate answer depending on the question type
       if(questions[i].questionType == 1) {
-        // Multiple choice question
+        /// Multiple choice question
         var answer = int.parse(stdin.readLineSync());
         assert(answer is int);
         if (questions[i].checkAnswer(answer)){
@@ -50,7 +58,7 @@ class Quiz {
           wrongAnswers.add(answer);
         }
       } else {
-        // Fill-in-the-blank question
+        /// Fill-in-the-blank question
         String answer = stdin.readLineSync();
         if (questions[i].checkAnswer(answer)){
           score++;
@@ -63,6 +71,7 @@ class Quiz {
     }
   }
 
+  /// Method giving extra feedback to user about questions answered wrong.
   void printWrongAnswers() {
     for(int i = 0; i < wrongQuestions.length; i++) {
       stdout.write(i+1);
