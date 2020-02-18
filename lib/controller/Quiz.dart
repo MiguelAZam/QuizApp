@@ -7,17 +7,31 @@
  */
 
 import './QuizAPI.dart';
-import './Question.dart';
+import './../model/Question.dart';
 import 'dart:io';
 
 class Quiz {
-  var quiz;                               /// Quiz obtained form server
-  var quizName;                           /// Quiz name
-  List<Question> questions = [];          /// Quiz questions
-  List<Question> wrongQuestions = [];     /// Wrong answered questions
-  List<dynamic> wrongAnswers = [];        /// Wrong answers
-  int score = 0;                          /// Correct answered questions
-  int totalQuestions = 0;                 /// Total of answered questions
+  var quiz;
+
+  /// Quiz obtained form server
+  var quizName;
+
+  /// Quiz name
+  List<Question> questions = [];
+
+  /// Quiz questions
+  List<Question> wrongQuestions = [];
+
+  /// Wrong answered questions
+  List<dynamic> wrongAnswers = [];
+
+  /// Wrong answers
+  int score = 0;
+
+  /// Correct answered questions
+  int totalQuestions = 0;
+
+  /// Total of answered questions
 
   /// Constructor
   Quiz(this.quiz);
@@ -38,34 +52,30 @@ class Quiz {
   /// Start solving the quiz
   void start() {
     for (var i = 0; i < this.questions.length; i++) {
-      print(Process.runSync("clear", [], runInShell: true).stdout); // Clear console
+      print(Process.runSync("clear", [], runInShell: true)
+          .stdout); // Clear console
 
       /// Write question
-      stdout.write(i+1);
+      stdout.write(i + 1);
       stdout.write(') ');
       questions[i].toString();
       stdout.write('Answer: ');
 
       /// Evaluate answer depending on the question type
-      if(questions[i].questionType == 1) {
-        /// Multiple choice question
-        var answer = int.parse(stdin.readLineSync());
-        assert(answer is int);
-        if (questions[i].checkAnswer(answer)){
-          score++;
-        } else {
-          wrongQuestions.add(questions[i]);
-          wrongAnswers.add(answer);
+      dynamic answer = stdin.readLineSync();
+      if (questions[i].questionType == 1) {
+        try {
+          answer = int.parse(answer);
+        } catch (FormatException) {
+          answer = -1;
         }
+      }
+
+      if (questions[i].checkAnswer(answer)) {
+        score++;
       } else {
-        /// Fill-in-the-blank question
-        String answer = stdin.readLineSync();
-        if (questions[i].checkAnswer(answer)){
-          score++;
-        } else {
-          wrongQuestions.add(questions[i]);
-          wrongAnswers.add(answer);
-        }
+        wrongQuestions.add(questions[i]);
+        wrongAnswers.add(answer);
       }
       totalQuestions++;
     }
@@ -73,8 +83,8 @@ class Quiz {
 
   /// Method giving extra feedback to user about questions answered wrong.
   void printWrongAnswers() {
-    for(int i = 0; i < wrongQuestions.length; i++) {
-      stdout.write(i+1);
+    for (int i = 0; i < wrongQuestions.length; i++) {
+      stdout.write(i + 1);
       stdout.write(') ');
       wrongQuestions[i].toString();
       stdout.writeln('');

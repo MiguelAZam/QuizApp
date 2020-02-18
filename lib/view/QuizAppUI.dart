@@ -16,30 +16,38 @@ String intro() {
   return stdin.readLineSync();
 }
 
-/// Asks user whether she/he wants to solve more quizzes 
-int continueTraining(){
+/// Asks user whether she/he wants to solve more quizzes
+int continueTraining() {
   print('Do you wish to continue with other quiz?');
   print('0: No');
   print('1: Yes');
   stdout.write('Answer: ');
-  int asnwer = int.parse(stdin.readLineSync());
-  assert(asnwer is int);
-  return asnwer;
+  int answer = 0;
+  try {
+    answer = int.parse(stdin.readLineSync());
+  } catch (FormatException) {
+    answer = 0;
+  }
+  return answer;
 }
 
 /// Asks user whether she/he want to review wrong answered questions
-int reviewWrongAnswers(){
+int reviewWrongAnswers() {
   print('Review wrong questions?');
   print('0: No');
   print('1: Yes');
   stdout.write('Answer: ');
-  int asnwer = int.parse(stdin.readLineSync());
-  assert(asnwer is int);
-  return asnwer;
+  int answer = 0;
+  try {
+    answer = int.parse(stdin.readLineSync());
+  } catch (FormatException) {
+    answer = 0;
+  }
+  return answer;
 }
 
 /// Allows user to see her/his score at the end of a quiz
-void evaluate(int score, totalQuestions){
+void evaluate(int score, totalQuestions) {
   stdout.write('Total score: ');
   stdout.write(score);
   stdout.write('/');
