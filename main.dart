@@ -23,12 +23,14 @@ main(List<String> args) async {
     evaluate(newQuiz.score, newQuiz.totalQuestions);
     stdout.writeln('');
 
-    int review = reviewWrongAnswers();
-    print(Process.runSync("clear", [], runInShell: true).stdout); // Clear console
-    if (review == 1) {
-      newQuiz.printWrongAnswers();
+    if (newQuiz.wrongQuestions.length > 0) {
+      int review = reviewWrongAnswers();
+      print(Process.runSync("clear", [], runInShell: true).stdout); // Clear console
+      if (review == 1) {
+        newQuiz.printWrongAnswers();
+      }
     }
-
+    
     // print(Process.runSync("clear", [], runInShell: true).stdout); // Clear console
 
     int keepGoing = continueTraining();
