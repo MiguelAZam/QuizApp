@@ -6,20 +6,24 @@
  * Last update: Feb 2, 2020
  */
 class FillBlankQuestion {
+  var type;
   var stem;
   var answer;
+  var figure;
 
   /// Contructor
-  /// 
+  ///
   /// Receives @question and populates @stem & @answer
   FillBlankQuestion(question) {
+    this.type = question["type"];
     this.stem = question["stem"];
+    this.figure = question["figure"];
     this.answer = question["answer"];
   }
 
   /// Checks if the response given by the user is correct
   /// going though all possible answers
-  /// 
+  ///
   /// Receives a String @response and compares such String with @answer
   bool checkAnswer(String response) {
     for (var i = 0; i < this.answer.length; i++) {
@@ -28,12 +32,5 @@ class FillBlankQuestion {
       }
     }
     return false;
-  }
-
-  /// Prints the stem of the question
-  @override
-  String toString() {
-    print(this.stem);
-    return null;
   }
 }

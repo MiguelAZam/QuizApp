@@ -9,16 +9,20 @@
 import 'dart:io';
 
 class MultipleQuestion {
+  var type;
   var stem;
+  var figure;
   var answer;
   var option;
 
   /// Contructor
-  /// 
+  ///
   /// Receives a Map @question of type <String, dynamic>
   /// and populates @stem, @answer, and @option
-  MultipleQuestion(Map<String, dynamic> question) {
+  MultipleQuestion(Map question) {
+    this.type = question["type"];
     this.stem = question["stem"];
+    this.figure = question["figure"];
     this.answer = question["answer"];
     this.option = question["option"];
   }
@@ -26,17 +30,5 @@ class MultipleQuestion {
   /// Checks if the response given by the user is correct
   bool checkAnswer(int response) {
     return response == this.answer;
-  }
-
-  /// Prints the question along with its answer options
-  @override
-  String toString() {
-    print(this.stem);
-    for(var i = 0; i < this.option.length; i++) {
-      stdout.write('\t');
-      stdout.write(i+1);
-      stdout.writeln(') ' + this.option[i]);
-    }
-    return null;
   }
 }
