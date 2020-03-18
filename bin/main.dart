@@ -5,7 +5,6 @@
  * Last update: Feb 2, 2020
  */
 
-import '../lib/view/QuizAppUI.dart';
 import '../lib/controller/Quiz.dart';
 
 /// Main method that triggers everything
