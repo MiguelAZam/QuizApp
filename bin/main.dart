@@ -12,9 +12,15 @@ main(List<String> args) async {
   var quiz = Quiz();
   //TODO: Try with an incorrect user or password
   var success = await quiz.startQuiz("mazamudioarias", "6593", 0);
-  if (success) {
-    print(quiz.getCurrent());
-  } else {
-    print(quiz.error);
-  }
+  print(quiz.getCurrentQuestion());
+  print(quiz.getProgress());
+  quiz.updateAnswer(2);
+  quiz.next();
+  print(quiz.getCurrentQuestion());
+  print(quiz.getProgress());
+  quiz.updateAnswer("Drawer");
+  print(quiz.evaluate());
+  quiz.startReview();
+  print(quiz.getCurrentIncorrect());
+  print(quiz.getProgress());
 }

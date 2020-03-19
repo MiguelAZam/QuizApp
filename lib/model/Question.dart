@@ -3,7 +3,7 @@
  * Authors: Miguel A. Zamudio & Cristian Ayub
  * Description: Contains all methods that identify what kind of question we are
  * receiving from the server
- * Last update: Feb 2, 2020
+ * Last update: Mar 19, 2020
  */
 
 import './FillBlankQuestion.dart';

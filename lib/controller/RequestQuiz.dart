@@ -44,6 +44,9 @@ class RequestQuiz {
         this.error = resMap["reason"];
         return null;
       }
+    } else {
+      this.error = "Server returned an 404 status code";
+      return null;
     }
   }
 }

@@ -3,7 +3,7 @@
  * Authors: Miguel A. Zamudio & Cristian Ayub
  * Description: Contains all methods that allow the creation and management of
  * a fill-in-the-blank question
- * Last update: Feb 2, 2020
+ * Last update: Mar 19, 2020
  */
 class FillBlankQuestion {
   var type;

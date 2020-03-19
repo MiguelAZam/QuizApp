@@ -3,10 +3,8 @@
  * Authors: Miguel A. Zamudio & Cristian Ayub
  * Description: Contains all methods that allow the creation and management of
  * a multiple choice question
- * Last update: Feb 2, 2020
+ * Last update: Mar 19, 2020
  */
-
-import 'dart:io';
 
 class MultipleQuestion {
   var type;
